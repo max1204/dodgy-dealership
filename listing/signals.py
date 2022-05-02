@@ -13,7 +13,7 @@ def send_interest_eamil(sender, instance, created, **kwargs):
     """
     if created:
         listing = instance.listing
-        commision = "{:.2f}".format(listing.price*0.05)
+        commision = f"{listing.price*0.05:.2f}"
         message = f"""
         There is a new Lead on the platform.\n
         Vehicle Details:\n

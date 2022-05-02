@@ -34,8 +34,8 @@ class ListCar(FormView):
     success_url = '/'
 
     def form_valid(self, form):
-        form.save()
-        messages.success(self.request, message="Thank you!!! Your car is listed")
+        listing = form.save()
+        messages.success(self.request, message=f"Thank you!!! Your car is listed. ID: {listing.id}")
         return super().form_valid(form)
 
 

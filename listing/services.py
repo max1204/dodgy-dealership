@@ -4,6 +4,9 @@ from .forms import InterestForm
 
 
 def make_listing_available(listing_id: str):
+    """
+    Make a car available again in the market.
+    """
     try:
         listing = Listings.objects.get(id=listing_id)
         listing.sold = False
@@ -13,6 +16,9 @@ def make_listing_available(listing_id: str):
         return False
 
 def cancel_lead(listing: Listings):
+    """
+    Close the lead if the car is not sold.
+    """
     try:
         interest = Interest.objects.get(listing=listing, status='open')
         interest.status = "cancelled"
@@ -27,14 +33,10 @@ def make_car_available(listing_id: str) -> bool:
     input : id : str
     returns: bool
     """
-    try:
-        listing = make_listing_available(listing_id)
-        if listing:
-            cancel_lead(listing)
-            return True
-    except Exception as e:
-        return False
-
+    listing = make_listing_available(listing_id)
+    if listing:
+        cancel_lead(listing)
+        return True
     return False
 
 

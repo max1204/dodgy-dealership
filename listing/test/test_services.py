@@ -1,7 +1,8 @@
 """Test class for services"""
 import uuid
 from django.test import TestCase
-from listing.services import cancel_lead, create_interest, make_car_available, make_listing_available
+from listing.services import cancel_lead, create_interest, \
+    make_car_available, make_listing_available
 from listing.factory_data import InterestFactory, ListingFactory
 from listing.forms import InterestForm
 from listing.models import Listings
