@@ -1,7 +1,7 @@
 """Test class for services"""
 import uuid
 from django.test import TestCase
-from listing.services import cancel_lead, create_interest, make_car_available
+from listing.services import cancel_lead, create_interest, make_car_available, make_listing_available
 from listing.factory_data import InterestFactory, ListingFactory
 from listing.forms import InterestForm
 from listing.models import Listings
@@ -66,7 +66,7 @@ class MakeCarAvailableTest(TestCase):
         self.assertEqual(available, False)
 
 
-class CancelInterestTest(TestCase):
+class CancelLeadTest(TestCase):
     """Test cancel lead functionality."""
 
     @staticmethod
@@ -89,4 +89,29 @@ class CancelInterestTest(TestCase):
         Make a wrong listing available
         """
         available = cancel_lead(str(uuid.uuid4()))
+        self.assertEqual(available, False)
+
+class MakeListingAvailableTest(TestCase):
+    """Test cancel lead functionality."""
+
+    @staticmethod
+    def create_interest():
+        """Create a Mock interest."""
+        return InterestFactory(listing=ListingFactory())
+
+
+    def test_make_listing_available(self):
+        """
+        Make a car available.
+        """
+        interest = self.create_interest()
+        available = make_listing_available(interest.listing.id)
+        self.assertIsInstance(available, Listings)
+
+
+    def test_make_listing_available_fail(self):
+        """
+        Make a wrong listing available
+        """
+        available = make_listing_available(str(uuid.uuid4()))
         self.assertEqual(available, False)
