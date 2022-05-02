@@ -5,13 +5,13 @@ from .views import Home, ListCar, InterestView, MakeAvailable
 urlpatterns = [
     path('', Home.as_view(), name='home'),
     path(
-        'listcar/', 
-        ListCar.as_view(), 
+        'listcar/',
+        ListCar.as_view(),
         name='list_car'
     ),
     path(
-        'interest/<uuid:id>', 
-        InterestView.as_view(), 
+        'interest/<uuid:id>',
+        InterestView.as_view(),
         name='interest'
     ),
     path(

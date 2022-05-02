@@ -15,15 +15,15 @@ def current_year():
 class Listings(models.Model):
     """Class for Listings Table in the database"""
     CONDITION_CHOICES = (
-        ('poor', 'Poor'), 
-        ('fair', 'Fair'), 
+        ('poor', 'Poor'),
+        ('fair', 'Fair'),
         ('good', 'Good'),
         ('excellent', 'Excellent')
     )
 
     id = models.UUIDField(
-            primary_key=True, 
-            default=uuid.uuid4, 
+            primary_key=True,
+            default=uuid.uuid4,
             editable=False
         )
     phone_regex = RegexValidator(
@@ -61,9 +61,9 @@ class Interest(models.Model):
     """Class for Interest Table in database."""
 
     CONDITION_CHOICES = (
-        ('open', 'Open'), 
+        ('open', 'Open'),
         ('in_process', 'In Process'),
-        ('closed', 'Close'), 
+        ('closed', 'Close'),
         ('cancelled', 'Cancelled')
     )
     phone_regex = RegexValidator(
@@ -72,8 +72,8 @@ class Interest(models.Model):
         "Phone number must be entered in the format: '+99 9999999'. Up to 15 digits allowed."
     )
     id = models.UUIDField(
-        primary_key=True, 
-        default=uuid.uuid4, 
+        primary_key=True,
+        default=uuid.uuid4,
         editable=False
     )
     name = models.CharField(

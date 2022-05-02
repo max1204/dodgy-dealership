@@ -10,4 +10,4 @@ class ListingConfig(AppConfig):
     name = 'listing'
 
     def ready(self):
-        import listing.signals
+        import listing.signals # pylint: disable=no-member

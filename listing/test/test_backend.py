@@ -37,5 +37,3 @@ class BackendTest(TestCase):
             password=self.credentials.get('password'))
 
         assert user is None
-
-

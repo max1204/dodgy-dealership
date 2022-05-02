@@ -16,7 +16,7 @@ kill:
 	docker-compose kill
 
 clean:
-	# Delete the container this stops the container first and then remves it. 
+	# Delete the container this stops the container first and then remves it.
 	$(MAKE) kill
 	docker-compose rm -f
 
@@ -25,8 +25,8 @@ test:
 	docker-compose run web coverage run manage.py test -v 2
 
 coverage:
-	docker-compose run web coverage report -m --omit="*/test*,manage.py,*/settings.py" 
+	docker-compose run web coverage report -m --omit="*/test*,manage.py,*/settings.py"
 
 code_quality:
 	docker-compose run web sh -c "export DJANGO_SETTINGS_MODULE=dodgy_dealership.settings"
-	docker-compose run web pylint -d duplicate-code --load-plugins pylint_django listing/
+	docker-compose run web pylint -d duplicate-code --disable={c0103} --django-settings-module=dodgy_dealership.settings --load-plugins pylint_django listing/

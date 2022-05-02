@@ -1,9 +1,15 @@
+"""Service module for all the functionality that interacts with database writes"""
 from .models import Listings, Interest
 from .forms import InterestForm
 
-def make_car_available(id: str) -> bool:
+def make_car_available(listing_id: str) -> bool:
+    """
+    Makes a car available again
+    input : id : str
+    returns: bool
+    """
     try:
-        listing = Listings.objects.get(id=id)
+        listing = Listings.objects.get(id=listing_id)
         listing.sold = False
         listing.save()
 
@@ -12,15 +18,25 @@ def make_car_available(id: str) -> bool:
         interest.save()
 
         return True
-    except Exception as e:
+    except Listings.DoesNotExist:
+        return False
+    except Interest.DoesNotExist:
         return False
 
 
-def create_interest(interest_form: InterestForm, id: str) -> Interest:
-    listing = Listings.objects.get(id=id)
+def create_interest(interest_form: InterestForm, listing_id: str) -> Interest:
+    """
+    Creates an interest
+    input:
+        interest_form: InterestForm
+        id: str
+    returns:
+        obj: Interest
+    """
+    listing = Listings.objects.get(id=listing_id)
     obj = interest_form.save(commit=False)
     obj.listing = listing
-    obj.save() 
+    obj.save()
     listing.sold = True
     listing.save()
     return obj

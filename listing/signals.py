@@ -1,13 +1,19 @@
-from django.db.models.signals import post_save, pre_save
+"""Module for signals for listing app"""
+from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import Interest
 from django.core.mail import send_mail
+
+from .models import Interest
 
 
 @receiver(post_save, sender=Interest)
 def send_interest_eamil(sender, instance, created, **kwargs):
+    """
+    After an interest is created we need to send an email to Iron Mike
+    """
     if created:
         listing = instance.listing
+        commision = "{:.2f}".format(listing.price*0.05)
         message = f"""
         There is a new Lead on the platform.\n
         Vehicle Details:\n
@@ -21,7 +27,7 @@ def send_interest_eamil(sender, instance, created, **kwargs):
         Buyer Details:\n
             Buyner Name: {instance.name}\n
             Contact Number: {instance.contact_number}\n
-        Commission: {"{:.2f}".format(listing.price*0.05)}
+        Commission: {commision}
         Transferrable Amount to seller: {listing.price-listing.price*0.05}
         """
         send_mail(
@@ -31,5 +37,3 @@ def send_interest_eamil(sender, instance, created, **kwargs):
             ['mike@example.com'],
             fail_silently=False,
         )
-
-    

@@ -52,7 +52,7 @@ class ListingTestCase(TestCase):
 
 class InterestTest(TestCase):
     """Interest model, form test"""
-    
+
     @staticmethod
     def create_interest():
         """Create Interest"""
