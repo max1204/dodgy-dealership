@@ -1,0 +1,8 @@
+{
+    "python.formatting.provider": "yapf",
+    "python.linting.enabled": true, 
+    "python.linting.pylintArgs": [
+        "--disable=django-not-configured",
+        "--django-settings-module=<mainapp>.settings",
+    ]
+}
